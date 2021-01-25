@@ -4,7 +4,7 @@
 
 int getLine(char s[], int lim);
 void copy(char to[], char from[]);
-void printTabsToSpaces(char s[], int len);
+void printSpacesToTabs(char s[], int len);
 /* print the longest input line */
 
 int main()
@@ -16,23 +16,37 @@ int main()
     max = 0;
     while ((len = getLine(line, MAXLINE)) > 0)
     {
-        printTabsToSpaces(line, len);
+        printSpacesToTabs(line, len);
     }
 
     return 0;
 }
 
-void printTabsToSpaces(char s[], int len)
+void printSpacesToTabs(char s[], int len)
 {
+    int spaceCount = 0;
     for (int i = 0; i <= len - 1; ++i)
     {
-        if (s[i] == '\t')
+        if (s[i] == ' ')
         {
-            for (int j = 0; i <= TAB_SPACES; ++j)
-                printf(" ");
+            ++spaceCount;
+            if (spaceCount == TAB_SPACES)
+            {
+                printf("\t");
+                spaceCount = 0;
+            }
         }
         else
         {
+            if (spaceCount > 0)
+            {
+                for (int i = 0; i <= spaceCount; ++i)
+                {
+                    printf(" ");
+                }
+                spaceCount = 0;
+            }
+
             printf("%c", s[i]);
         }
     }
