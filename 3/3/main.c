@@ -13,6 +13,7 @@ void expands(char s1[], char s2[])
         {
             if ((i - 1) < 0 || s1[i + 1] == '\0')
             {
+                s2[j++] = '-';
                 i++;
                 continue;
             }
